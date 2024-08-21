@@ -1,10 +1,18 @@
 <script>
 import axios from 'axios';
+import { store } from '../store.js';
+import ProjectCard from './ProjectCard.vue';
 
 export default {
+
+    components: {
+
+        ProjectCard
+    },
+
     data() {
         return {
-            projects: [],
+            store
         
 
         };
@@ -16,7 +24,7 @@ export default {
            .then((response) => {
             // handle success
             console.log(response.data.results.data);
-            this.projects = response.data.results.data;
+            this.store.projects = response.data.results.data;
             })
 
             .catch(function (error) {
@@ -35,17 +43,11 @@ export default {
 
 <template>
     <div>
-        <h1>Main</h1>
+       
     </div>
 
-    <ul>
-        <li v-for="project in projects">
+    <ProjectCard />
 
-            {{ project.name }}
-
-        </li>
-
-    </ul>
     
 </template>
 
