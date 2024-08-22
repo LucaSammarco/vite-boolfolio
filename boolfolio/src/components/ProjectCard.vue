@@ -1,11 +1,30 @@
 <script>
 import { store } from '../store.js';
+import axios from 'axios';
+
 
 export default {
     data() {
         return {
             store
         };
+    },
+    methods: {
+        getProjects() {
+            axios.get('http://127.0.0.1:8000/api/projects')
+                .then((response) => {
+                    // handle success
+                    console.log(response.data.results.data);
+                    this.store.projects = response.data.results.data;
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                });
+        }
+    },
+    created() {
+        this.getProjects();
     }
 };
 </script>
@@ -34,8 +53,9 @@ export default {
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">{{ project.name }}</h5>
-                        <p class="card-text">{{ project.description }}</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <router-link :to="{ name: 'single-project', params: { id: project.id } }" class="btn btn-primary">
+                            Read More
+                        </router-link>
                     </div>
                 </div>
             </div>

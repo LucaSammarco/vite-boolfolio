@@ -11,7 +11,7 @@ export default {
  components: {
    MainHeader,
    MainApp,
-    MainFooter,
+  MainFooter,
     
   },
 };
@@ -22,7 +22,7 @@ export default {
 <template>
   <MainHeader />
 
-  <MainApp />
+  <router-view> </router-view>
 
 
   <MainFooter />
